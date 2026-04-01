@@ -82,25 +82,27 @@ analyzeBtn.onclick = async () => {
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile",
                 messages: [
-                    { 
-                        role: "system", 
-                        content: `You are an EDPR Legal AI Auditor. Your objective is to audit contracts against the EDPR Strategic Policy provided below.
+                    {
+                        role: "system",
+                        content: `You are an EDPR Red-Line Auditor. Your ONLY task is to identify where the Vendor's proposed text deviates from the EDPR Strategic Policy.
                         
                         STRATEGIC POLICY:
                         ${policyContent}
                         
-                        For every risk or misalignment found, you MUST use this exact format:
+                        INSTRUCTIONS:
+                        1. Ignore standard clauses that align with policy.
+                        2. ONLY report on 'Contested' or 'Red-Lined' sections.
+                        3. If a vendor capped liability, removed safety roles, or obscured sourcing, flag it immediately.
                         
-                        Detected Risk: [Describe the specific clause or omission]
-                        Policy Alignment: [Reference the Point # from the Policy]
-                        Suggested Red-line: [Provide professional, protective legal phrasing]
-                        Decorum Tip: [Provide a collaborative framing for the vendor]
-                        
-                        If the contract aligns well, provide a summary of its strengths relative to EDPR's 2026-28 Plan.` 
+                        OUTPUT FORMAT PER RED-LINE:
+                        🚩 DETECTED RED-LINE: [Exact Vendor Change]
+                        ⚖️ POLICY MISALIGNMENT: [Point # from Policy]
+                        📝 RECOMMENDED COUNTER: [Professional Legal Rebuttal]
+                        💡 DECORUM STRATEGY: [How to negotiate this without hurting the partnership]`
                     },
-                    { 
-                        role: "user", 
-                        content: `Audit the following contract text:\n\n${contractText}` 
+                    {
+                        role: "user",
+                        content: `Identify the critical red-lines in this vendor response:\n\n${contractText}`
                     }
                 ],
                 temperature: 0.1, // Low temperature for high consistency/accuracy

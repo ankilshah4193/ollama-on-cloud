@@ -1,127 +1,138 @@
-body { 
-    font-family: 'Inter', -apple-system, sans-serif; 
-    background: #f8fafc; 
-    color: #1e293b; 
-    display: flex; 
-    justify-content: center; 
-    padding: 20px; 
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --bg-app: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-main);
     margin: 0;
+    line-height: 1.5;
 }
 
-.container { 
-    width: 100%; 
-    max-width: 700px; 
-    background: white; 
-    padding: 40px; 
-    border-radius: 12px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+.app-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-header h1 { margin: 0; color: #0f172a; }
-header p { color: #64748b; margin-top: 5px; }
+/* Header & Brand */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
 
-/* Main Contract Input */
-#contract-input { 
-    width: 100%; 
-    height: 250px; 
-    margin-top: 20px; 
-    padding: 15px; 
-    border: 1px solid #e2e8f0; 
-    border-radius: 8px; 
-    font-size: 15px; 
+.brand { display: flex; gap: 16px; align-items: center; }
+.logo { font-size: 32px; }
+.brand h1 { margin: 0; font-size: 24px; font-weight: 700; }
+.brand p { margin: 0; color: var(--text-muted); font-size: 14px; }
+
+/* Input Card */
+.input-section {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.label-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+label { font-weight: 600; font-size: 14px; }
+.badge { font-size: 11px; background: #f1f5f9; padding: 4px 8px; border-radius: 20px; color: var(--text-muted); }
+
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     font-family: inherit;
-    resize: vertical; 
-    box-sizing: border-box; 
+    font-size: 15px;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
 }
 
-#analyze-btn { 
-    width: 100%; 
-    background: #10b981; 
-    color: white; 
-    border: none; 
-    padding: 15px; 
-    border-radius: 8px; 
-    font-size: 16px; 
-    font-weight: 600; 
-    cursor: pointer; 
-    margin-top: 15px; 
-    transition: background 0.2s; 
+textarea:focus { outline: none; border-color: var(--primary); }
+
+.primary-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background 0.2s;
 }
 
-#analyze-btn:hover { background: #059669; }
-#analyze-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+.primary-btn:hover { background: var(--primary-dark); }
 
-.hidden { display: none; }
-#results-container { margin-top: 30px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
-#output-text { line-height: 1.6; color: #334155; white-space: pre-wrap; font-size: 15px; }
-
-/* Settings Gear */
-#settings-trigger { 
-    position: fixed; 
-    bottom: 30px; 
-    right: 30px; 
-    font-size: 24px; 
-    cursor: pointer; 
-    background: white; 
-    width: 50px; 
-    height: 50px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 50%; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-    transition: transform 0.2s;
-}
-#settings-trigger:hover { transform: rotate(45deg); }
-
-/* Modal UI */
-.modal { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0,0,0,0.5); 
-    backdrop-filter: blur(4px); 
+/* Results */
+.results-section {
+    margin-top: 32px;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
 }
 
-.modal-content { 
-    background: white; 
-    width: 450px; 
-    margin: 8vh auto; 
-    padding: 30px; 
-    border-radius: 12px; 
-    max-height: 85vh; 
-    overflow-y: auto; 
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+}
+
+.markdown-body { white-space: pre-wrap; font-size: 15px; color: #334155; }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+}
+
+.modal-content {
+    background: white;
+    max-width: 400px;
+    margin: 100px auto;
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+.modal-header { display: flex; justify-content: space-between; align-items: center; }
+.close-btn { background: none; border: none; font-size: 24px; cursor: pointer; }
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     box-sizing: border-box;
 }
 
-.modal-content h2 { margin-top: 0; color: #0f172a; }
-.modal-content p { font-size: 14px; margin-bottom: 5px; }
-
-input[type="password"], #policy-input { 
-    width: 100%; 
-    padding: 10px; 
-    border: 1px solid #cbd5e1; 
-    border-radius: 6px; 
-    box-sizing: border-box; 
-    font-family: inherit;
-    font-size: 14px;
-}
-
-#policy-input {
-    height: 120px;
-    resize: vertical;
-}
-
-.modal-links { text-align: right; margin-top: 5px; }
-.modal-links a { color: #2563eb; font-size: 12px; text-decoration: none; }
-.modal-links a:hover { text-decoration: underline; }
-
-.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; }
-.modal-actions button { padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
-#close-modal { background: #e2e8f0; color: #475569; }
-#close-modal:hover { background: #cbd5e1; }
-.primary-btn { background: #2563eb; color: white; }
-.primary-btn:hover { background: #1d4ed8; }
+.hidden { display: none; }

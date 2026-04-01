@@ -1,14 +1,13 @@
 /**
- * RENEWABLE LEGAL AIDE - CORE ENGINE
- * Integrated with Groq Cloud (Llama 3.3 70B)
+ * RENEWABLE LEGAL AIDE - WEB ENGINE (DYNAMIC POLICY)
  */
 
-// --- UI ELEMENTS ---
 const modal = document.getElementById('settings-modal');
 const trigger = document.getElementById('settings-trigger');
 const saveBtn = document.getElementById('save-settings');
 const closeBtn = document.getElementById('close-modal');
 const keyInput = document.getElementById('groq-key-input');
+const policyInput = document.getElementById('policy-input');
 const analyzeBtn = document.getElementById('analyze-btn');
 const outputContainer = document.getElementById('results-container');
 const outputText = document.getElementById('output-text');
@@ -16,23 +15,24 @@ const outputText = document.getElementById('output-text');
 // --- SETTINGS & MODAL LOGIC ---
 trigger.onclick = () => {
     keyInput.value = localStorage.getItem('groq_api_key') || '';
+    policyInput.value = localStorage.getItem('company_policy') || '';
     modal.style.display = 'block';
 };
 
 closeBtn.onclick = () => modal.style.display = 'none';
-
-window.onclick = (event) => {
-    if (event.target == modal) modal.style.display = "none";
-};
+window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; };
 
 saveBtn.onclick = () => {
     const key = keyInput.value.trim();
-    if (key) {
+    const policy = policyInput.value.trim();
+    
+    if (key && policy) {
         localStorage.setItem('groq_api_key', key);
+        localStorage.setItem('company_policy', policy);
         modal.style.display = 'none';
-        alert("API Settings Saved Successfully.");
+        alert("Settings & Policy Saved Successfully.");
     } else {
-        alert("Please enter a valid API Key.");
+        alert("Please enter both an API Key and a Strategic Policy.");
     }
 };
 
@@ -40,39 +40,22 @@ saveBtn.onclick = () => {
 analyzeBtn.onclick = async () => {
     const contractText = document.getElementById('contract-input').value.trim();
     const apiKey = localStorage.getItem('groq_api_key');
+    const policyContext = localStorage.getItem('company_policy');
 
-    if (!apiKey) {
-        alert("Configuration Required: Please enter your Groq API key in the Settings (⚙️).");
+    if (!apiKey || !policyContext) {
+        alert("Configuration Required: Please set your Groq API key and Policy in the Settings (⚙️).");
         modal.style.display = 'block';
         return;
     }
 
-    if (!contractText) {
-        alert("Please paste contract text to analyze.");
-        return;
-    }
+    if (!contractText) return alert("Please paste contract text to analyze.");
 
-    // UI State: Loading
     analyzeBtn.disabled = true;
     analyzeBtn.innerText = "Auditing against Policy...";
-    outputContainer.style.display = 'block';
-    outputText.innerText = "Fetching Strategic Policy and initializing AI...";
+    outputContainer.classList.remove('hidden');
+    outputText.innerText = "Initializing AI Auditor...";
 
     try {
-        // 1. Fetch the Company Policy from your GitHub Repo
-        let policyContent = "";
-        try {
-            const policyResponse = await fetch('company_policy.txt');
-            if (policyResponse.ok) {
-                policyContent = await policyResponse.text();
-            } else {
-                console.warn("Policy file not found. Proceeding with general legal knowledge.");
-            }
-        } catch (e) {
-            console.error("Error loading policy file:", e);
-        }
-
-        // 2. Prepare the AI Request (Grounded in your 20 Points)
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -84,15 +67,14 @@ analyzeBtn.onclick = async () => {
                 messages: [
                     {
                         role: "system",
-                        content: `You are an EDPR Red-Line Auditor. Your ONLY task is to identify where the Vendor's proposed text deviates from the EDPR Strategic Policy.
+                        content: `You are a Red-Line Auditor. Your ONLY task is to identify where the Vendor's proposed text deviates from the Strategic Policy.
                         
                         STRATEGIC POLICY:
-                        ${policyContent}
+                        ${policyContext}
                         
                         INSTRUCTIONS:
                         1. Ignore standard clauses that align with policy.
                         2. ONLY report on 'Contested' or 'Red-Lined' sections.
-                        3. If a vendor capped liability, removed safety roles, or obscured sourcing, flag it immediately.
                         
                         OUTPUT FORMAT PER RED-LINE:
                         🚩 DETECTED RED-LINE: [Exact Vendor Change]
@@ -100,28 +82,18 @@ analyzeBtn.onclick = async () => {
                         📝 RECOMMENDED COUNTER: [Professional Legal Rebuttal]
                         💡 DECORUM STRATEGY: [How to negotiate this without hurting the partnership]`
                     },
-                    {
-                        role: "user",
-                        content: `Identify the critical red-lines in this vendor response:\n\n${contractText}`
-                    }
+                    { role: "user", content: `Identify the critical red-lines in this text:\n\n${contractText}` }
                 ],
-                temperature: 0.1, // Low temperature for high consistency/accuracy
-                max_tokens: 4096
+                temperature: 0.1
             })
         });
 
         const data = await response.json();
-
-        if (data.error) {
-            throw new Error(data.error.message || "Unknown AI Error");
-        }
-
-        // 3. Display Results
+        if (data.error) throw new Error(data.error.message || "Unknown AI Error");
         outputText.innerText = data.choices[0].message.content;
 
     } catch (err) {
-        console.error("Analysis Failed:", err);
-        outputText.innerHTML = `<span style="color:red;">Error: ${err.message}</span><br>Please check your API key and ensure the 'company_policy.txt' is in your repo.`;
+        outputText.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
     } finally {
         analyzeBtn.disabled = false;
         analyzeBtn.innerText = "Analyze Contract";

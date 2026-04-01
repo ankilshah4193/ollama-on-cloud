@@ -1,16 +1,122 @@
-body { font-family: 'Inter', -apple-system, sans-serif; background: #f8fafc; color: #1e293b; display: flex; justify-content: center; padding: 20px; }
-.container { width: 100%; max-width: 700px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+body { 
+    font-family: 'Inter', -apple-system, sans-serif; 
+    background: #f8fafc; 
+    color: #1e293b; 
+    display: flex; 
+    justify-content: center; 
+    padding: 20px; 
+}
+
+.container { 
+    width: 100%; 
+    max-width: 700px; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+}
+
 header h1 { margin: 0; color: #0f172a; }
-textarea { width: 100%; height: 250px; margin-top: 20px; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 16px; resize: none; box-sizing: border-box; }
-#analyze-btn { width: 100%; background: #10b981; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
+
+/* Main Contract Input */
+#contract-input { 
+    width: 100%; 
+    height: 250px; 
+    margin-top: 20px; 
+    padding: 15px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    resize: vertical; 
+    box-sizing: border-box; 
+}
+
+#analyze-btn { 
+    width: 100%; 
+    background: #10b981; 
+    color: white; 
+    border: none; 
+    padding: 15px; 
+    border-radius: 8px; 
+    font-size: 18px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    margin-top: 15px; 
+    transition: background 0.2s; 
+}
+
 #analyze-btn:hover { background: #059669; }
+#analyze-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
 .hidden { display: none; }
 #results-container { margin-top: 30px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
 #output-text { line-height: 1.6; color: #334155; white-space: pre-wrap; }
-/* Modal */
-#settings-trigger { position: fixed; bottom: 30px; right: 30px; font-size: 24px; cursor: pointer; background: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
-.modal-content { background: white; width: 320px; margin: 15vh auto; padding: 30px; border-radius: 12px; }
-input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+
+/* Settings Gear */
+#settings-trigger { 
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    font-size: 24px; 
+    cursor: pointer; 
+    background: white; 
+    width: 50px; 
+    height: 50px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+}
+
+/* Modal UI */
+.modal { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(4px); 
+}
+
+.modal-content { 
+    background: white; 
+    width: 400px; /* Slightly wider to accommodate policy text */
+    margin: 10vh auto; 
+    padding: 30px; 
+    border-radius: 12px; 
+    max-height: 80vh; 
+    overflow-y: auto; 
+}
+
+input { 
+    width: 100%; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 6px; 
+    box-sizing: border-box; 
+}
+
+/* Modal Policy Input */
+#policy-input {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.modal-links a { color: #2563eb; font-size: 13px; text-decoration: none; }
+.modal-links a:hover { text-decoration: underline; }
+
 .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 .primary-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+.primary-btn:hover { background: #1d4ed8; }

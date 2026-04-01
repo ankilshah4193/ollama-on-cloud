@@ -22,9 +22,13 @@
     <div id="settings-trigger">⚙️</div>
     <div id="settings-modal" class="modal">
         <div class="modal-content">
-            <h2>API Configuration</h2>
-            <p>Enter your <strong>Groq API Key</strong>. It is stored locally in your browser.</p>
+            <h2>Configuration</h2>
+            <p>Enter your <strong>Groq API Key</strong>:</p>
             <input type="password" id="groq-key-input" placeholder="gsk_xxxxxxxxxxxx">
+            
+            <p><strong>Strategic Policy:</strong></p>
+            <textarea id="policy-input" placeholder="Paste your company policy rules here..." style="width: 100%; height: 100px; margin-bottom: 10px;"></textarea>
+            
             <div class="modal-links">
                 <a href="https://console.groq.com/keys" target="_blank">Get a free key</a>
             </div>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renewable Legal Aide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Renewable Legal Aide</h1>
+            <p>AI-Powered Contract Analysis</p>
+        </header>
+
+        <main>
+            <textarea id="contract-input" placeholder="Paste your contract text here..."></textarea>
+            <button id="analyze-btn">Analyze Selection</button>
+            
+            <div id="results-container" style="display:none;">
+                <h3>Analysis Results</h3>
+                <div id="output-text"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="settings-trigger">⚙️</div>
+
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h2>AI Configuration</h2>
+            <p>Enter your <strong>Groq API Key</strong> to enable cloud analysis.</p>
+            <input type="password" id="groq-key-input" placeholder="gsk_xxxxxxxxxxxx">
+            <small><a href="https://console.groq.com/keys" target="_blank">Get a free key from Groq Cloud</a></small>
+            <div class="modal-actions">
+                <button id="close-modal">Cancel</button>
+                <button id="save-settings" class="primary-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

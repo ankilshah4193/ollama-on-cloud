@@ -5,6 +5,7 @@ body {
     display: flex; 
     justify-content: center; 
     padding: 20px; 
+    margin: 0;
 }
 
 .container { 
@@ -17,6 +18,7 @@ body {
 }
 
 header h1 { margin: 0; color: #0f172a; }
+header p { color: #64748b; margin-top: 5px; }
 
 /* Main Contract Input */
 #contract-input { 
@@ -26,7 +28,8 @@ header h1 { margin: 0; color: #0f172a; }
     padding: 15px; 
     border: 1px solid #e2e8f0; 
     border-radius: 8px; 
-    font-size: 16px; 
+    font-size: 15px; 
+    font-family: inherit;
     resize: vertical; 
     box-sizing: border-box; 
 }
@@ -38,7 +41,7 @@ header h1 { margin: 0; color: #0f172a; }
     border: none; 
     padding: 15px; 
     border-radius: 8px; 
-    font-size: 18px; 
+    font-size: 16px; 
     font-weight: 600; 
     cursor: pointer; 
     margin-top: 15px; 
@@ -50,7 +53,7 @@ header h1 { margin: 0; color: #0f172a; }
 
 .hidden { display: none; }
 #results-container { margin-top: 30px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
-#output-text { line-height: 1.6; color: #334155; white-space: pre-wrap; }
+#output-text { line-height: 1.6; color: #334155; white-space: pre-wrap; font-size: 15px; }
 
 /* Settings Gear */
 #settings-trigger { 
@@ -67,7 +70,9 @@ header h1 { margin: 0; color: #0f172a; }
     justify-content: center; 
     border-radius: 50%; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    transition: transform 0.2s;
 }
+#settings-trigger:hover { transform: rotate(45deg); }
 
 /* Modal UI */
 .modal { 
@@ -83,40 +88,40 @@ header h1 { margin: 0; color: #0f172a; }
 
 .modal-content { 
     background: white; 
-    width: 400px; /* Slightly wider to accommodate policy text */
-    margin: 10vh auto; 
+    width: 450px; 
+    margin: 8vh auto; 
     padding: 30px; 
     border-radius: 12px; 
-    max-height: 80vh; 
+    max-height: 85vh; 
     overflow-y: auto; 
+    box-sizing: border-box;
 }
 
-input { 
+.modal-content h2 { margin-top: 0; color: #0f172a; }
+.modal-content p { font-size: 14px; margin-bottom: 5px; }
+
+input[type="password"], #policy-input { 
     width: 100%; 
     padding: 10px; 
-    margin: 10px 0; 
     border: 1px solid #cbd5e1; 
     border-radius: 6px; 
     box-sizing: border-box; 
-}
-
-/* Modal Policy Input */
-#policy-input {
-    width: 100%;
-    height: 120px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    box-sizing: border-box;
-    resize: vertical;
     font-family: inherit;
     font-size: 14px;
 }
 
-.modal-links a { color: #2563eb; font-size: 13px; text-decoration: none; }
+#policy-input {
+    height: 120px;
+    resize: vertical;
+}
+
+.modal-links { text-align: right; margin-top: 5px; }
+.modal-links a { color: #2563eb; font-size: 12px; text-decoration: none; }
 .modal-links a:hover { text-decoration: underline; }
 
-.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-.primary-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; }
+.modal-actions button { padding: 10px 16px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+#close-modal { background: #e2e8f0; color: #475569; }
+#close-modal:hover { background: #cbd5e1; }
+.primary-btn { background: #2563eb; color: white; }
 .primary-btn:hover { background: #1d4ed8; }

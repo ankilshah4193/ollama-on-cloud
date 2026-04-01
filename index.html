@@ -3,41 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renewable Contract Review</title>
+    <title>AI Contract Analysis</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Renewable Contract Review</h1>
+            <h1>AI Contract Analysis</h1>
             <p>Professional Contract Analysis Engine</p>
         </header>
-        <textarea id="contract-input" placeholder="Paste contract clauses here for risk analysis..."></textarea>
+        <textarea id="contract-input" placeholder="Paste vendor contract clauses here for risk analysis..."></textarea>
         <button id="analyze-btn">Analyze Contract</button>
         <div id="results-container" class="hidden">
             <h3>Analysis Report</h3>
             <div id="output-text"></div>
         </div>
     </div>
+    
     <div id="settings-trigger">⚙️</div>
+    
     <div id="settings-modal" class="modal">
         <div class="modal-content">
-            <h2>Configuration</h2>
-            <p>Enter your <strong>Groq API Key</strong>:</p>
+            <h2>Configuration & Policy</h2>
+            <p><strong>Groq API Key:</strong></p>
             <input type="password" id="groq-key-input" placeholder="gsk_xxxxxxxxxxxx">
-            
-            <p><strong>Strategic Policy:</strong></p>
-            <textarea id="policy-input" placeholder="Paste your company policy rules here..." style="width: 100%; height: 100px; margin-bottom: 10px;"></textarea>
-            
             <div class="modal-links">
-                <a href="https://console.groq.com/keys" target="_blank">Get a free key</a>
+                <a href="https://console.groq.com/keys" target="_blank">Get a free Groq API key</a>
             </div>
+            
+            <p style="margin-top: 15px;"><strong>Strategic Company Policy:</strong></p>
+            <textarea id="policy-input" placeholder="Paste your company policy rules here (e.g., 1. Mutual Indemnity, 2. Net 60 Terms...)"></textarea>
+            
             <div class="modal-actions">
                 <button id="close-modal">Cancel</button>
-                <button id="save-settings" class="primary-btn">Save</button>
+                <button id="save-settings" class="primary-btn">Save Setup</button>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

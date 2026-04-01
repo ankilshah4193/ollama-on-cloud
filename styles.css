@@ -1,81 +1,16 @@
-body {
-    font-family: -apple-system, sans-serif;
-    background-color: #f4f7f6;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin-top: 50px;
-}
-
-header h1 { color: #2c3e50; margin-bottom: 5px; }
-header p { color: #7f8c8d; margin-top: 0; }
-
-textarea {
-    width: 100%;
-    height: 300px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-button#analyze-btn {
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
-}
-
-#results-container {
-    margin-top: 30px;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-}
-
-.modal-content {
-    background: white;
-    margin: 15% auto;
-    padding: 30px;
-    width: 350px;
-    border-radius: 12px;
-}
-
-input#groq-key-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-}
-
-#settings-trigger {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    background: white;
-    padding: 10px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
+body { font-family: 'Inter', -apple-system, sans-serif; background: #f8fafc; color: #1e293b; display: flex; justify-content: center; padding: 20px; }
+.container { width: 100%; max-width: 700px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+header h1 { margin: 0; color: #0f172a; }
+textarea { width: 100%; height: 250px; margin-top: 20px; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 16px; resize: none; box-sizing: border-box; }
+#analyze-btn { width: 100%; background: #10b981; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: background 0.2s; }
+#analyze-btn:hover { background: #059669; }
+.hidden { display: none; }
+#results-container { margin-top: 30px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
+#output-text { line-height: 1.6; color: #334155; white-space: pre-wrap; }
+/* Modal */
+#settings-trigger { position: fixed; bottom: 30px; right: 30px; font-size: 24px; cursor: pointer; background: white; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+.modal-content { background: white; width: 320px; margin: 15vh auto; padding: 30px; border-radius: 12px; }
+input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+.primary-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }

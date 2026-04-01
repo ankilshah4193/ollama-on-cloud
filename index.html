@@ -3,41 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Contract Analysis</title>
+    <title>Renewable Legal Aide | AI Auditor</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI Contract Analysis</h1>
-            <p>Professional Contract Analysis Engine</p>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="brand">
+                <span class="logo">⚖️</span>
+                <div>
+                    <h1>Renewable Legal Aide</h1>
+                    <p>AI-Powered Strategic Contract Auditor</p>
+                </div>
+            </div>
+            <button id="settings-trigger" class="icon-btn" title="API Settings">⚙️</button>
         </header>
-        <textarea id="contract-input" placeholder="Paste vendor contract clauses here for risk analysis..."></textarea>
-        <button id="analyze-btn">Analyze Contract</button>
-        <div id="results-container" class="hidden">
-            <h3>Analysis Report</h3>
-            <div id="output-text"></div>
-        </div>
+
+        <main class="main-content">
+            <section class="input-section">
+                <div class="label-group">
+                    <label for="contract-input">Vendor Contract Text</label>
+                    <span class="badge">Llama 3.3 70B</span>
+                </div>
+                <textarea id="contract-input" placeholder="Paste the vendor's red-lined clauses or proposed text here..."></textarea>
+                <button id="analyze-btn" class="primary-btn">
+                    <span class="btn-text">Run Audit</span>
+                    <div class="loader hidden"></div>
+                </button>
+            </section>
+
+            <section id="results-container" class="results-section hidden">
+                <div class="results-header">
+                    <h3>Analysis Report</h3>
+                    <button class="text-btn" onclick="window.print()">Download PDF</button>
+                </div>
+                <div id="output-text" class="markdown-body"></div>
+            </section>
+        </main>
     </div>
-    
-    <div id="settings-trigger">⚙️</div>
-    
+
     <div id="settings-modal" class="modal">
         <div class="modal-content">
-            <h2>Configuration & Policy</h2>
-            <p><strong>Groq API Key:</strong></p>
-            <input type="password" id="groq-key-input" placeholder="gsk_xxxxxxxxxxxx">
-            <div class="modal-links">
-                <a href="https://console.groq.com/keys" target="_blank">Get a free Groq API key</a>
+            <header class="modal-header">
+                <h2>API Configuration</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </header>
+            <div class="modal-body">
+                <label for="groq-key-input">Groq API Key</label>
+                <input type="password" id="groq-key-input" placeholder="gsk_xxxxxxxxxxxx">
+                <p class="helper-text">Stored locally in your browser. <a href="https://console.groq.com/keys" target="_blank">Get a free key</a></p>
             </div>
-            
-            <p style="margin-top: 15px;"><strong>Strategic Company Policy:</strong></p>
-            <textarea id="policy-input" placeholder="Paste your company policy rules here (e.g., 1. Mutual Indemnity, 2. Net 60 Terms...)"></textarea>
-            
-            <div class="modal-actions">
-                <button id="close-modal">Cancel</button>
-                <button id="save-settings" class="primary-btn">Save Setup</button>
-            </div>
+            <footer class="modal-actions">
+                <button id="save-settings" class="primary-btn">Save Changes</button>
+            </footer>
         </div>
     </div>
 
